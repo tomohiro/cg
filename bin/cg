@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+CG_ROOT = File.expand_path('..', File.dirname(__FILE__))
+$: << CG_ROOT
+
+require 'lib/contents_generator'
+
+ContentsGenerator.boot

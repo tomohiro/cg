@@ -1,0 +1,133 @@
+header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+header h1 {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    font-size: 500%;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+
+article {
+    float: left;
+    width: 580px;
+    padding-bottom: 100px;
+    padding-right: 20px;
+}
+
+article h1 {
+    font-size: 200%;
+    font-weight: normal;
+    color: #1A1A1A;
+}
+
+article ul li {
+    list-style: circle;
+}
+
+aside {
+    float: left;
+    width: 180px;
+    padding: 2px;
+}
+
+aside h1 {
+    width: 100%;
+    text-align: center;
+}
+
+aside ul {
+    padding-bottom: 10px;
+}
+
+aside ul li {
+    list-style: none;
+    padding: 2px;
+}
+
+#twitter {
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+aside section h1 {
+    text-align: left;
+    font-size: 100%;
+    font-weight: normal;
+}
+
+div#information {
+    clear: both;
+    margin-top: 550px;
+    border-top: double #AAA;
+    font-size: small;
+    text-align: center;
+}
+
+div#information {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    width: 800px;
+    height: 300px;
+}
+
+div#information h1 {
+    text-align: center;
+}
+
+#bookmark {
+    float: left;
+    width: 250px;
+    text-align: left;
+}
+#bookmark ul {
+    padding: 0px;
+    margin: 0px;
+}
+#bookmark li {
+    list-style: none;
+    margin-bottom: 1em;
+    padding: 0px;
+}
+#flickr {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    height: 100%;
+}
+
+#services {
+    float: left;
+}
+
+#services ul li {
+    list-style: none;
+    text-align: left;
+    vertical-align: middle;
+}
+#services ul li img {
+    margin-right: 0.5em;
+}
+
+footer {
+    clear: both;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    text-align: center;
+}
+footer#copyright {
+    margin: 30px;
+    text-align: center;
+}

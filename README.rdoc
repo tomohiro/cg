@@ -1,6 +1,40 @@
 = cg
 
-Description goes here.
+== Description
+
+cg is A Ruby based HTML "contents generator".
+
+
+== Required RubyGems
+
+    $ sudo gem install rake
+    $ sudo gem install jeweler
+    $ sudo gem install tilt
+    $ sudo gem install erubis
+    $ sudo gem install rdiscount
+
+
+== Install
+
+- GitHub
+
+    $ git clone http://github.com/Tomohiro/cg.git
+
+
+== Usage
+
+1. First
+
+    $ cg scratch site_name
+
+2. All Rebuild
+
+    $ cg rebuild
+
+3. Convert
+
+    $ cg convert markdown_file
+
 
 == Note on Patches/Pull Requests
  
@@ -12,6 +46,12 @@ Description goes here.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
+
 == Copyright
 
-Copyright (c) 2010 Tomohiro, TAIRA. See LICENSE for details.
+Copyright (c) 2010 Tomohiro, TAIRA. 
+
+
+== Licence
+
+The MIT License. See LICENSE for details.
