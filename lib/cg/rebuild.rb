@@ -14,6 +14,9 @@ module CG
     end
 
     def start
+      Dir.glob('markdown/*.mkd').each do |file|
+        CG::Convert.start! file
+      end
     end
   end
 end
