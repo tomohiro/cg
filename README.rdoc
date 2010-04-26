@@ -7,32 +7,40 @@ cg is A Ruby based HTML "contents generator".
 
 == Required RubyGems
 
- $ sudo gem install rake
- $ sudo gem install jeweler
- $ sudo gem install tilt
- $ sudo gem install erubis
- $ sudo gem install rdiscount
+* rake
+* jeweler
+* tilt
+* erubis
+* rdiscount
 
 
 == Install
 
+- RubyGems.org
+
+   $ sudo gem install cg
+
 - GitHub
 
    $ git clone http://github.com/Tomohiro/cg.git
+   $ rake build
+   $ sudo rake install
 
 
 == Usage
 
 1. First Step
 
-    $ cg scratch site_name
+    $ cg scratch cg.example.com
 
 2. All Rebuild
 
+    $ cd cg.example.com
     $ cg rebuild
 
 3. Convert
 
+    $ cd cg.example.com/markdown/
     $ cg convert markdown_file
 
 

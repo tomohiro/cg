@@ -53,8 +53,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{HTML Contents Generator}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/cg_spec.rb"
+    "spec/cg_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
