@@ -18,22 +18,22 @@ cg is A Ruby based HTML "contents generator".
 
 - GitHub
 
-   $ git clone http://github.com/Tomohiro/cg.git
+  $ git clone http://github.com/Tomohiro/cg.git
 
 
 == Usage
 
 1. First
 
-   $ cg scratch site_name
+    $ cg scratch site_name
 
 2. All Rebuild
 
-   $ cg rebuild
+    $ cg rebuild
 
 3. Convert
 
-   $ cg convert markdown_file
+    $ cg convert markdown_file
 
 
 == Note on Patches/Pull Requests
