@@ -18,7 +18,7 @@ cg is A Ruby based HTML "contents generator".
 
 - GitHub
 
-    $ git clone http://github.com/Tomohiro/cg.git
+   $ git clone http://github.com/Tomohiro/cg.git
 
 
 == Usage
