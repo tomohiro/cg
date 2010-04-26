@@ -44,6 +44,17 @@ cg is A Ruby based HTML "contents generator".
     $ cg convert markdown_file
 
 
+== Tips
+
+1. After save hook for Vim
+
+    $ vi .vimrc
+    autocmd BufWritePost *.mkd :silent !cg convert %
+
+
+2. After save hoook for Emacs
+
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
