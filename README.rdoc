@@ -7,11 +7,11 @@ cg is A Ruby based HTML "contents generator".
 
 == Required RubyGems
 
-  $ sudo gem install rake
-  $ sudo gem install jeweler
-  $ sudo gem install tilt
-  $ sudo gem install erubis
-  $ sudo gem install rdiscount
+ $ sudo gem install rake
+ $ sudo gem install jeweler
+ $ sudo gem install tilt
+ $ sudo gem install erubis
+ $ sudo gem install rdiscount
 
 
 == Install
