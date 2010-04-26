@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
-require 'pathname'
 
 require 'rubygems'
 require 'tilt'
@@ -27,7 +26,7 @@ module CG
 
       template = load_template
       @article = article_rendering(load_markdown(@source))
-      @root    = relative_path(dir_path)
+      @relative = relative_path(dir_path)
 
       mkdir_p dir_path
 
@@ -47,8 +46,8 @@ module CG
     end
 
     def relative_path(dir_path)
-      point = Pathname.new(@site_base_path) <=> Pathname.new(dir_path + '/')
-      '../' * (point.abs + 1) unless point == 0
+      point = dir_path.gsub(@site_base_path, '').split('/').count
+      '../' * point
     end
 
     def load_template(template_name = 'html.rb')
