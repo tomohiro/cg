@@ -23,7 +23,7 @@ cg is A Ruby based HTML "contents generator".
 
 == Usage
 
-1. First
+1. First Step
 
     $ cg scratch site_name
 
