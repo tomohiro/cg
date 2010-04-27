@@ -8,7 +8,7 @@ begin
     gem.summary = 'HTML Contents Generator'
     gem.description = 'cg is A Ruby based contents generator' 
     gem.email = "tomohiro.t+github@gmail.com"
-    gem.homepage = "http://github.com/Tomohiro/cg"
+    gem.homepage = 'http://rubygems.org/gems/cg'
     gem.authors = ["Tomohiro, TAIRA"]
     gem.add_dependency 'tilt', '>= 0.9'
     gem.add_dependency 'erubis', '>= 2.6.5'

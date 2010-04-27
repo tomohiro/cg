@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'pathname'
 
 require 'rubygems'
 require 'tilt'
@@ -32,7 +33,7 @@ module CG
       html_path = File.join(dir_path, html_name)
       open(html_path, 'w') do |f|
         @article = article_rendering(load_markdown(@source))
-        @relative = relative_path(dir_path)
+        @relative = (Pathname.new(@root).relative_path_from(Pathname.new(dir_path))).to_s + '/'
 
         f.write page_build(load_template)
         puts "#{@source} => #{html_path}"
@@ -47,11 +48,6 @@ module CG
       html_name = File.basename(expand_path).gsub('.mkd', '.html')
 
       [dir_path, html_name]
-    end
-
-    def relative_path(dir_path)
-      point = dir_path.gsub(@root, '').split('/').count
-      '../' * point
     end
 
     def load_template(template_name = 'html.rb')
