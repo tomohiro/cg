@@ -1,11 +1,11 @@
-= cg
+# cg
 
-== Description
+## Description
 
 cg is A Ruby based HTML "contents generator".
 
 
-== Required RubyGems
+## Required RubyGems
 
 * rake
 * jeweler
@@ -14,7 +14,7 @@ cg is A Ruby based HTML "contents generator".
 * rdiscount
 
 
-== Install
+## Install
 
 - RubyGems.org
 
@@ -27,7 +27,7 @@ cg is A Ruby based HTML "contents generator".
    $ sudo rake install
 
 
-== Usage
+## Usage
 
 1. First Step
 
@@ -38,13 +38,19 @@ cg is A Ruby based HTML "contents generator".
     $ cd cg.example.com
     $ cg rebuild
 
+3. All Rebuild and Packing
+
+    $ cd cg.example.com
+    $ cg rebuild packing
+    $ tar zxvf public.tar.gz -C /var/www/html/
+
 3. Convert
 
     $ cd cg.example.com/markdown/
     $ cg convert markdown_file
 
 
-== Tips
+## Tips
 
 1. After save hook for Vim
 
@@ -55,7 +61,7 @@ cg is A Ruby based HTML "contents generator".
 2. After save hoook for Emacs
 
 
-== Note on Patches/Pull Requests
+## Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -66,11 +72,11 @@ cg is A Ruby based HTML "contents generator".
 * Send me a pull request. Bonus points for topic branches.
 
 
-== Copyright
+## Copyright
 
 Copyright (c) 2010 Tomohiro, TAIRA. 
 
 
-== Licence
+## Licence
 
 The MIT License. See LICENSE for details.
