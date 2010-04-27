@@ -14,7 +14,11 @@ module CG
 
     def initialize(source)
       @source = source || ARGV.first
-      @site_base_path = File.expand_path(File.dirname(@source)).gsub('markdown', '')
+
+      @root = File.expand_path(File.dirname(@source)).gsub('markdown', '')
+      @domain = @root.split('/').last
+
+      @templates_dir = templates_dir
     end
 
     def self.start!(source = nil)
@@ -23,15 +27,13 @@ module CG
 
     def start
       dir_path, html_name = gen_output_path(@source)
-
-      template = load_template
-      @article = article_rendering(load_markdown(@source))
-      @relative = relative_path(dir_path)
-
       mkdir_p dir_path
 
       open(File.join(dir_path, html_name), 'w') do |f|
-        f.write page_build(template)
+        @article = article_rendering(load_markdown(@source))
+        @relative = relative_path(dir_path)
+
+        f.write page_build(load_template)
       end
     end
 
@@ -39,45 +41,53 @@ module CG
       markdown_base = File.dirname(source)
       expand_path = source.gsub(/-|\+/, '/')
 
-      dir_path = File.expand_path("#{@site_base_path}/#{File.dirname(expand_path).gsub(markdown_base, '')}")
+      dir_path = File.expand_path("#{@root}/#{File.dirname(expand_path).gsub(markdown_base, '')}")
       html_name = File.basename(expand_path).gsub('.mkd', '.html')
 
       [dir_path, html_name]
     end
 
     def relative_path(dir_path)
-      point = dir_path.gsub(@site_base_path, '').split('/').count
+      point = dir_path.gsub(@root, '').split('/').count
       '../' * point
     end
 
     def load_template(template_name = 'html.rb')
-      Tilt::ErubisTemplate.new do
-        File.read("#{@site_base_path}/templates/#{template_name}")
-      end
+      Tilt::ErubisTemplate.new { File.read("#{@templates_dir}/#{template_name}") }
     end
 
     def load_markdown(source)
       Tilt::RDiscountTemplate.new { File.read(source) }
     end
 
+    def templates_dir
+      if File.directory? "#{@root}/templates"
+        "#{@root}/templates"
+      else
+        File.expand_path('../../skel/templates', File.dirname(__FILE__))
+      end
+    end
+
     def article_rendering(markdown)
-      @disqus_subdomain = @site_base_path.split('/').last.gsub('.', '-')
-      @disqus = disqus_template
+      @disqus = comment_rendering
 
       article = Tilt::ErubisTemplate.new { markdown.render }
       article.render(self)
     end
 
-    def page_build(page)
-      @title = [(Nokogiri::HTML(@article)/'h2').text, (Nokogiri::HTML(@article)/'h1').text].join(' - ')
+    def comment_rendering
+      return unless File.exist? "#{@templates_dir}/disqus.rb"
 
-      page.render(self)
+      @disqus_subdomain = @domain.gsub('.', '-')
+
+      comment = Tilt::ErubisTemplate.new { File.read("#{@templates_dir}/disqus.rb") }
+      comment.render(self)
     end
 
-    def disqus_template
-      return unless File.exist? "#{@site_base_path}/templates/disqus.rb"
-      disqus = Tilt::ErubisTemplate.new { File.read("#{@site_base_path}/templates/disqus.rb") }
-      disqus.render(self)
+    def page_build(page)
+      @title = [(Nokogiri::HTML(@article)/'h1').text, @domain].join(' - ')
+
+      page.render(self)
     end
   end
 end

@@ -12,6 +12,10 @@
         <title><%= @title %></title>
     </head>
     <body>
+        <header>
+          <h1><a href="http://<%= @domain %>"><%= @domain %></a></h1>
+        </header>
+
         <nav>
             <ul>
                 <li><a href="index.html">Index</a></li>
