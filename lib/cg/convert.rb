@@ -29,11 +29,13 @@ module CG
       dir_path, html_name = gen_output_path(@source)
       mkdir_p dir_path
 
-      open(File.join(dir_path, html_name), 'w') do |f|
+      html_path = File.join(dir_path, html_name)
+      open(html_path, 'w') do |f|
         @article = article_rendering(load_markdown(@source))
         @relative = relative_path(dir_path)
 
         f.write page_build(load_template)
+        puts "#{@source} => #{html_path}"
       end
     end
 
