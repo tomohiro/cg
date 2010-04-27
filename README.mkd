@@ -1,82 +1,83 @@
-# cg
+cg
+================================================================================
 
-## Description
+Description
+--------------------------------------------------------------------------------
 
 cg is A Ruby based HTML "contents generator".
 
 
-## Required RubyGems
+### Required RubyGems
 
-* rake
-* jeweler
-* tilt
-* erubis
-* rdiscount
+- rake
+- jeweler
+- tilt
+- erubis
+- rdiscount
 
 
-## Install
+### Install
 
 - RubyGems.org
 
-   $ sudo gem install cg
+        $ sudo gem install cg
 
 - GitHub
 
-   $ git clone http://github.com/Tomohiro/cg.git
-   $ rake build
-   $ sudo rake install
+        $ git clone http://github.com/Tomohiro/cg.git
+        $ rake build
+        $ sudo rake install
 
 
-## Usage
+### Usage
 
 1. First Step
 
-    $ cg scratch cg.example.com
+        $ cg scratch cg.example.com
 
 2. All Rebuild
 
-    $ cd cg.example.com
-    $ cg rebuild
+        $ cd cg.example.com
+        $ cg rebuild
 
 3. All Rebuild and Packing
 
-    $ cd cg.example.com
-    $ cg rebuild packing
-    $ tar zxvf public.tar.gz -C /var/www/html/
+        $ cd cg.example.com
+        $ cg rebuild packing
+        $ tar zxvf public.tar.gz -C /var/www/html/
 
 3. Convert
 
-    $ cd cg.example.com/markdown/
-    $ cg convert markdown_file
+        $ cd cg.example.com/markdown/
+        $ cg convert markdown_file
 
 
-## Tips
+### Tips
 
 1. After save hook for Vim
 
-    $ vi .vimrc
-    autocmd BufWritePost *.mkd :silent !cg convert %
-
+        $ vi .vimrc
+>      autocmd BufWritePost *.mkd :silent !cg convert %
 
 2. After save hoook for Emacs
 
 
-## Note on Patches/Pull Requests
+### Note on Patches/Pull Requests
  
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
+- Fork the project.
+- Make your feature addition or bug fix.
+- Add tests for it. This is important so I don't break it in a
   future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
+- Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+- Send me a pull request. Bonus points for topic branches.
 
 
-## Copyright
+### Copyright
 
 Copyright (c) 2010 Tomohiro, TAIRA. 
 
 
-## Licence
+### Licence
 
 The MIT License. See LICENSE for details.
