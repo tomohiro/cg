@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cg}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tomohiro, TAIRA"]
@@ -31,7 +31,9 @@ Gem::Specification.new do |s|
      "lib/cg/rebuild.rb",
      "lib/cg/scratch.rb",
      "lib/contents_generator.rb",
+     "skel/exclude",
      "skel/images/please_puts_image_here",
+     "skel/markdown/.htaccess",
      "skel/markdown/index.mkd",
      "skel/scripts/create-elements.js",
      "skel/scripts/disqus.js",
@@ -40,6 +42,7 @@ Gem::Specification.new do |s|
      "skel/styles/fonts-min.css",
      "skel/styles/iphone.css",
      "skel/styles/reset-min.css",
+     "skel/templates/.htaccess",
      "skel/templates/disqus.rb",
      "skel/templates/html.rb",
      "spec/cg_spec.rb",
