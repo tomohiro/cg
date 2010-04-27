@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
      "lib/cg/rebuild.rb",
      "lib/cg/scratch.rb",
      "lib/contents_generator.rb",
-     "skel/exclude",
+     "skel/.exclude",
      "skel/images/please_puts_image_here",
      "skel/markdown/.htaccess",
      "skel/markdown/index.mkd",
