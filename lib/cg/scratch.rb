@@ -20,6 +20,7 @@ module CG
       mkdir(@site) unless dir_exists?(@site)
       cd(@site) do |dir|
         cp_r(Dir.glob(SKEL_PATH + '/*'), './')
+        cp_r(Dir.glob(SKEL_PATH + '/.*'), './')
       end
     end
 
