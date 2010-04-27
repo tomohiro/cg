@@ -33,7 +33,7 @@ module CG
 
     def packaging
       display '   Packing Start.'
-      display `tar zcvf public.tar.gz -X exclude *`
+      display `tar zcvf public.tar.gz -X .exclude *`
       display '   Packing End.'
     end
 
