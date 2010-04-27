@@ -18,10 +18,7 @@ module CG
 
     def start
       mkdir(@site) unless dir_exists?(@site)
-      cd(@site) do |dir|
-        cp_r(Dir.glob(SKEL_PATH + '/*'), './')
-        cp_r(Dir.glob(SKEL_PATH + '/.*'), './')
-      end
+      cp_r(Dir.glob(SKEL_PATH + '/{*,.exclude}'), @site)
     end
 
     def dir_exists?(name)
