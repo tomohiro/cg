@@ -9,6 +9,7 @@ cg is A Ruby based HTML "contents generator".
 
 ### Required RubyGems
 
+- rack
 - rake
 - jeweler
 - tilt
@@ -51,6 +52,12 @@ cg is A Ruby based HTML "contents generator".
         $ cd cg.example.com/markdown/
         $ cg convert markdown_file
 
+4. Server
+
+        $ cg server
+
+    Access to [http://localhost:9292](http://localhost:9292)
+
 
 ### Tips
 
@@ -59,7 +66,7 @@ cg is A Ruby based HTML "contents generator".
         $ vi .vimrc
 >      autocmd BufWritePost *.mkd :silent !cg convert % > /dev/null
 
-2. After save hoook for Emacs
+2. After save hook for Emacs
 
 
 ### Note on Patches/Pull Requests
