@@ -34,7 +34,7 @@
 
         <footer>
             <p>Copyright &#169; <%= Date.today.year %> <a href="http://tomohiro.github.com">Tomohiro</a> All rights reserved.</p>
-            <p>Powerd by <a href="http://rubygems.org/gems/cg" title="cg - A Ruby based contents generator">cg - A Ruby based contents generator</a></p>
+            <p>Powered by <a href="http://rubygems.org/gems/cg" title="cg - A Ruby based contents generator">cg - A Ruby based contents generator</a></p>
         </footer>
     </body>
 </html>
