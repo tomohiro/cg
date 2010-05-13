@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cg}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tomohiro, TAIRA"]
-  s.date = %q{2010-04-27}
+  s.date = %q{2010-05-13}
   s.default_executable = %q{cg}
   s.description = %q{cg is A Ruby based contents generator}
   s.email = %q{tomohiro.t+github@gmail.com}
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "lib/cg/convert.rb",
      "lib/cg/rebuild.rb",
      "lib/cg/scratch.rb",
+     "lib/cg/server.rb",
      "lib/contents_generator.rb",
      "skel/.exclude",
      "skel/images/please_puts_image_here",
@@ -54,10 +55,10 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{HTML Contents Generator}
+  s.summary = %q{HTML5 Contents Generator}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/cg_spec.rb"
+    "spec/cg_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -65,12 +66,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rack>, [">= 1.1.0"])
       s.add_runtime_dependency(%q<tilt>, [">= 0.9"])
       s.add_runtime_dependency(%q<erubis>, [">= 2.6.5"])
       s.add_runtime_dependency(%q<nokogiri>, [">= 1.4.1"])
       s.add_runtime_dependency(%q<rdiscount>, [">= 1.6.3.1"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
+      s.add_dependency(%q<rack>, [">= 1.1.0"])
       s.add_dependency(%q<tilt>, [">= 0.9"])
       s.add_dependency(%q<erubis>, [">= 2.6.5"])
       s.add_dependency(%q<nokogiri>, [">= 1.4.1"])
@@ -78,6 +81,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
+    s.add_dependency(%q<rack>, [">= 1.1.0"])
     s.add_dependency(%q<tilt>, [">= 0.9"])
     s.add_dependency(%q<erubis>, [">= 2.6.5"])
     s.add_dependency(%q<nokogiri>, [">= 1.4.1"])
