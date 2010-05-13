@@ -33,8 +33,8 @@
         </article>
 
         <footer>
-            <p>Copyright &#169; <%= Date.today.year %> <a href="mailto:tomohiro.t+github@gmail.com">Tomohiro</a> All rights reserved.</p>
-            <p>Powerd by <a href="http://github.com/Tomohiro/cg" title="cg - A Ruby based ContentsGenerator">cg - A Ruby based contents generator</a></p>
+            <p>Copyright &#169; <%= Date.today.year %> <a href="http://tomohiro.github.com">Tomohiro</a> All rights reserved.</p>
+            <p>Powerd by <a href="http://rubygems.org/gems/cg" title="cg - A Ruby based contents generator">cg - A Ruby based contents generator</a></p>
         </footer>
     </body>
 </html>
