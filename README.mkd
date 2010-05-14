@@ -58,6 +58,14 @@ cg is A Ruby based HTML "contents generator".
 
     Access to [http://localhost:9292](http://localhost:9292)
 
+        $ cg server -p 8080
+
+    Access to [http://localhost:8080](http://localhost:8080)
+
+    Want to run cg server as a daemon? use `nohup`.
+
+        $ nohup cg server -p 8080 > &
+
 
 ### Tips
 
