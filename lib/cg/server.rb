@@ -7,7 +7,6 @@ module CG
   class Server
     def initialize
       @file_server = Rack::File.new('.')
-
     end
 
     def call(env)
