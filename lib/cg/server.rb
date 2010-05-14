@@ -7,6 +7,7 @@ module CG
   class Server
     def initialize
       @file_server = Rack::File.new('.')
+
     end
 
     def call(env)
@@ -19,6 +20,13 @@ module CG
 end
 
 if __FILE__ == $0
-  puts "[#{Time.now.strftime('%Y-%m-%d %H:%m')}] cg server start. http://localhost:9292"
-  Rack::Handler::default.run CG::Server.new, :Port => 9292
+  require 'optparse'
+  port = 9292
+  ARGV.options do |o|
+    o.on('-p', '--port PORT_NUMBER', " (default: #{port})") { |v| port = v }
+    o.parse!
+  end
+
+  puts "[#{Time.now.strftime('%Y-%m-%d %H:%m')}] cg server start. http://localhost:#{port}"
+  Rack::Handler::default.run CG::Server.new, :Port => port
 end
