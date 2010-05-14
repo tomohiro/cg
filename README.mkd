@@ -36,23 +36,34 @@ cg is A Ruby based HTML "contents generator".
 
         $ cg scratch cg.example.com
 
-2. All Rebuild
+2. Convert
+
+        $ cd cg.example.com/markdown/
+        $ cg convert index.mkd
+
+    Ex.
+
+        $ cg convert cg.example.com/markdown/index.mkd
+        => cg.example.com/index.html
+
+        $ cg convert cg.example.com/markdown/foo+index.mkd
+        => cg.example.com/foo/index.html
+
+        $ cg convert cg.example.com/markdown/foo-bar+hello.mkd
+        => cg.example.com/foo/bar/hello.html
+
+3. All Rebuild
 
         $ cd cg.example.com
         $ cg rebuild
 
-3. All Rebuild and Packing
+4. All Rebuild and Packing
 
         $ cd cg.example.com
         $ cg rebuild packing
         $ tar zxvf public.tar.gz -C /var/www/html/
 
-3. Convert
-
-        $ cd cg.example.com/markdown/
-        $ cg convert markdown_file
-
-4. Server
+5. Server
 
         $ cg server
 
@@ -69,12 +80,16 @@ cg is A Ruby based HTML "contents generator".
 
 ### Tips
 
-1. After save hook for Vim
+1. Template customize
+
+        $ vi templates/html.erb
+
+2. After save hook for Vim
 
         $ vi .vimrc
 >      autocmd BufWritePost *.mkd :silent !cg convert % > /dev/null
 
-2. After save hook for Emacs
+3. After save hook for Emacs
 
 
 ### Note on Patches/Pull Requests

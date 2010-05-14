@@ -50,7 +50,7 @@ module CG
       [dir_path, html_name]
     end
 
-    def load_template(template_name = 'html.rb')
+    def load_template(template_name = 'html.erb')
       Tilt::ErubisTemplate.new { File.read("#{@templates_dir}/#{template_name}") }
     end
 
@@ -74,11 +74,11 @@ module CG
     end
 
     def comment_rendering
-      return unless File.exist? "#{@templates_dir}/disqus.rb"
+      return unless File.exist? "#{@templates_dir}/disqus.erb"
 
       @disqus_subdomain = @domain.gsub('.', '-')
 
-      comment = Tilt::ErubisTemplate.new { File.read("#{@templates_dir}/disqus.rb") }
+      comment = Tilt::ErubisTemplate.new { File.read("#{@templates_dir}/disqus.erb") }
       comment.render(self)
     end
 
