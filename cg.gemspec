@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cg}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tomohiro, TAIRA"]
-  s.date = %q{2010-05-14}
+  s.date = %q{2010-06-04}
   s.default_executable = %q{cg}
   s.description = %q{cg is A Ruby based contents generator}
   s.email = %q{tomohiro.t+github@gmail.com}
@@ -45,8 +45,8 @@ Gem::Specification.new do |s|
      "skel/styles/iphone.css",
      "skel/styles/reset-min.css",
      "skel/templates/.htaccess",
-     "skel/templates/disqus.rb",
-     "skel/templates/html.rb",
+     "skel/templates/disqus.erb",
+     "skel/templates/html.erb",
      "spec/cg_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{HTML5 Contents Generator}
+  s.summary = %q{HTML Contents Generator}
   s.test_files = [
     "spec/cg_spec.rb",
      "spec/spec_helper.rb"

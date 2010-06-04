@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = 'cg'
-    gem.summary = 'HTML5 Contents Generator'
+    gem.summary = 'HTML Contents Generator'
     gem.description = 'cg is A Ruby based contents generator' 
     gem.email = "tomohiro.t+github@gmail.com"
     gem.homepage = 'http://rubygems.org/gems/cg'
