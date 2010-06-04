@@ -20,12 +20,14 @@ end
 
 if __FILE__ == $0
   require 'optparse'
+  host = 'localhost'
   port = 9292
   ARGV.options do |o|
     o.on('-p', '--port PORT_NUMBER', " (default: #{port})") { |v| port = v }
+    o.on('-h', '--host HOST', " (default: #{host})") { |v| host = v }
     o.parse!
   end
 
-  puts "[#{Time.now.strftime('%Y-%m-%d %H:%m')}] cg server start. http://localhost:#{port}"
-  Rack::Handler::default.run CG::Server.new, :Port => port
+  puts "[#{Time.now.strftime('%Y-%m-%d %H:%m')}] cg server start. http://#{host}:#{port}"
+  Rack::Handler::default.run CG::Server.new, :Port => port, :Host => host
 end
