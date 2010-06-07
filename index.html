@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=320">
+        <link rel="stylesheet" media="screen, print" href="./styles/reset-min.css">
+        <link rel="stylesheet" media="screen, print" href="./styles/fonts-min.css">
+        <link rel="stylesheet" media="screen and (min-device-width: 481px), print" href="./styles/cg.css">
+        <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./styles/iphone.css">
+        <link rel="stylesheet" media="screen, print" href="./styles/syntax.css">
+        <!--[if IE]><link rel="stylesheet" media="screen, projection" href="./styles/cg.css"><![endif]-->
+        <!--[if lte IE 8]><script src="./scripts/create-elements.js" type="text/javascript"></script><![endif]-->
+        <script type="text/javascript" src="./scripts/highlight.pack.js"></script>
+        <script type="text/javascript">hljs.initHighlightingOnLoad('html','css','ruby','bash');</script>
+        <title>cg - A Ruby based contents generator</title>
+    </head>
+    <body>
+        <header>
+          <h1><a href="http://tomohiro.github.com/cg">tomohiro.github.com / cg</a></h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Index</a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <article>
+
+<!-- Auto generated start -->
+
+<h1>cg - A Ruby based contents generator</h1>
+
+<h2>cg の使い方</h2>
+
+<h3>はじめに</h3>
+
+<p>cg は CLI 上で動作させることに特化した HTML コンテンツジェネレータです．</p>
+
+<p>Markdown 記法で記述されたテキストファイルを HTML コードに変換し，用意されたテンプレートに埋め込んで静的
+HTML ファイルを含んだ Web サイトを構築します．</p>
+
+<p>Vim/Emacs 等，CLI 上でよく使用されるエディタを普段から愛用している人は便利に使用できるでしょう．</p>
+
+<h3>インストール</h3>
+
+<p>cg は RubyGems のライブラリとして公開されており，<code>gem</code> コマンドでインストールすることができます．</p>
+
+<pre><code>$ sudo gem install cg
+</code></pre>
+
+<p>依存しているライブラリも共にインストールされます．</p>
+
+<blockquote><pre><code>Building native extensions.  This could take a while...
+Successfully installed tilt-0.10
+Successfully installed abstract-1.0.0
+Successfully installed erubis-2.6.5
+Successfully installed rdiscount-1.6.3.2
+Successfully installed cg-0.0.6
+5 gems installed
+</code></pre></blockquote>
+
+<p>インストールされた cg のバージョンは下記のように確認できます．</p>
+
+<pre><code>$ cg version
+</code></pre>
+
+<blockquote><pre><code>cg 0.0.7
+</code></pre></blockquote>
+
+<h3>プロジェクトの作成</h3>
+
+<p>まず最初に <code>cg scratch project-name</code> コマンドで Web サイトのプロジェクトを作成します．</p>
+
+<p>プロジェクト名にはドメイン名を使用するのが良いでしょう．</p>
+
+<pre><code>$ cg scratch test.example.com
+</code></pre>
+
+<p>プロジェクトはディレクトリとして生成されます．</p>
+
+<p>ディレクトリの中の構成を確認しましょう．</p>
+
+<pre><code>$ cd test.example.com
+$ ls
+</code></pre>
+
+<blockquote><pre><code>images markdown scripts styles templates
+</code></pre></blockquote>
+
+<p><code>images</code> <code>markdown</code> <code>scripts</code> <code>styles</code> <code>templates</code> というディレクトリが存在すれば
+プロジェクトの作成は成功です．</p>
+
+<p>ではさっそく Web サイトを生成してみましょう．</p>
+
+<p>生成にはプロジェクトディレクトリ直下で <code>cg rebuild</code> コマンドを実行します．</p>
+
+<pre><code>$ cg rebuild
+</code></pre>
+
+<blockquote><pre><code>Rebuild Start.  Fri Jun 04 13:39:39 +0900 2010
+markdown/index.mkd =&gt; /home/tomohiro/test.example.com/index.html
+Rebuild Success.  Fri Jun 04 13:39:39 +0900 2010
+</code></pre></blockquote>
+
+<p><code>Rebuild Success.</code> が表示されれば，Web サイトの構築は終了です．</p>
+
+<p>構築した Web サイトを確認するため, <code>cg server</code> コマンドで Web サーバを起動します．</p>
+
+<pre><code>$ cg server
+</code></pre>
+
+<blockquote><pre><code>[2010-06-04 13:06] cg server start. http://localhost:9292
+[2010-06-04 13:44:24] INFO  WEBrick 1.3.1
+[2010-06-04 13:44:24] INFO  ruby 1.8.7 (2010-01-10) [i486-linux]
+[2010-06-04 13:44:24] INFO  WEBrick::HTTPServer#start: pid=25638 port=9292
+</code></pre></blockquote>
+
+<p>起動すると <a href="http://localhost:9292">http://localhost:9292</a> へアクセスできるようになります．</p>
+
+<p>Web ブラウザで下記のような画面が表示されていれば成功です．</p>
+
+<p><img src="/images/index.png" alt="cg のインデックス画面" /></p>
+
+<h3>Web ページを新規作成する</h3>
+
+<p>次に新たな Web ページを作成してみます．</p>
+
+<p>まず Web ページを生成するための元となる Markdown ファイルを作っておきましょう．</p>
+
+<p>好みのエディタで <code>markdown</code> ディレクトリ以下に <code>hello.mkd</code> というファイルを新規作成します．</p>
+
+<pre><code>$ vi markdown/hello.mkd
+</code></pre>
+
+<blockquote><pre><code># こんにちは
+</code></pre></blockquote>
+
+<p><code>hello.mkd</code> に「# こんにちは」という文章を入力して保存・終了してください．</p>
+
+<p>これで Web ページを作るための元ファイルが出来ました．</p>
+
+<p>元ファイルを HTML ファイルに変換する時は <code>cg convert</code> コマンドを使用します．</p>
+
+<pre><code>$ cg convert hello.mkd
+</code></pre>
+
+<blockquote><pre><code>markdown/hello.mkd =&gt; /home/tomohiro/test.example.com/hello.html
+</code></pre></blockquote>
+
+<p><code>hello.mkd</code> を元に生成された <code>hello.html</code> には <a href="http://localhost:9292/hello.html">http://localhost:9292/hello.html</a>
+というアドレスでアクセスできます．</p>
+
+<p>生成に成功していれば下記のように表示されるでしょう．</p>
+
+<p><img src="/images/hello.png" alt="新規作成した hello.html の画面" /></p>
+
+<p>このように <code>markdown</code> ディレクトリ以下に Markdown 形式のファイルを作成することで新たな Web ページを
+増やしていくことができます．</p>
+
+<h3>基本コマンド</h3>
+
+<ol>
+<li><p>プロジェクト作成 - <code>cg scratch</code></p>
+
+<pre><code>$ cg scratch cg.example.com
+</code></pre></li>
+<li><p>Web ページの生成 - <code>cg convert</code></p>
+
+<pre><code>$ cd cg.example.com
+$ cg convert index.mkd
+</code></pre>
+
+<blockquote><pre><code>index.mkd =&gt; /home/tomohiro/cg.example.com/index.html
+</code></pre></blockquote></li>
+<li><p>サイト全体の再構成 - <code>cg rebuild</code></p>
+
+<p> <code>cg rebuild</code> コマンドは <code>markdown</code> ディレクトリ以下にある Markdown ファイル全てに <code>cg convert</code> を実行します．</p>
+
+<pre><code>$ cd cg.example.com
+$ cg rebuild
+</code></pre>
+
+<blockquote><pre><code>Rebuild Start.  Fri Jun 04 15:23:49 +0900 2010
+markdown/index.mkd =&gt; /tmp/test.example.com/index.html
+markdown/hello.mkd =&gt; /tmp/test.example.com/hello.html
+Rebuild Success.  Fri Jun 04 15:23:49 +0900 2010
+</code></pre></blockquote></li>
+<li><p>再構築して必要なファイルだけを圧縮ファイルにする - <code>cg rebuild packing</code></p>
+
+<p> プロジェクトディレクトリを公開ディレクトリに置きたくない人もいることでしょう．</p>
+
+<p> <code>cg rebuild</code> コマンドに <code>packing</code> オプションを付加すると生成された Web ページ全体を圧縮ファイルとしてまとめることができます。</p>
+
+<p> 圧縮ファイルは <code>public.tar.gz</code> というファイル名でディレクトリ直下に生成されます．</p>
+
+<pre><code> $ cd cg.example.com
+ $ cg rebuild packing
+</code></pre>
+
+<blockquote><pre><code>Rebuild Start.  Fri Jun 04 14:53:33 +0900 2010
+markdown/index.mkd =&gt; /tmp/test.example.com/index.html
+markdown/hello.mkd =&gt; /tmp/test.example.com/hello.html
+   Packing Start.  Fri Jun 04 14:53:33 +0900 2010
+hello.html
+images/
+images/please_puts_image_here
+index.html
+scripts/
+scripts/disqus.js
+scripts/create-elements.js
+styles/
+styles/fonts-min.css
+styles/default.css
+styles/cg.css
+styles/reset-min.css
+styles/iphone.css
+  Fri Jun 04 14:53:33 +0900 2010
+   Packing End.  Fri Jun 04 14:53:33 +0900 2010
+Rebuild Success.  Fri Jun 04 14:53:33 +0900 2010
+</code></pre></blockquote>
+
+<p> 圧縮ファイルを下記のように展開すれば公開ディレクトリへデプロイできます．</p>
+
+<pre><code>$ tar zxvf public.tar.gz -C /var/www/html/
+</code></pre>
+
+<p> 圧縮ファイルに含めたくないファイルを追加する場合は <code>.exclude</code> ファイルを編集します．</p>
+
+<pre><code>$ vi .exclude
+</code></pre>
+
+<blockquote><pre><code>templates
+markdown
+public.tar.gz
+.git
+</code></pre></blockquote></li>
+<li><p>cg サーバ起動 - <code>cg server</code></p>
+
+<pre><code>$ cg server
+</code></pre>
+
+<p> cg サーバを起動すると <a href="http://localhost:9292">http://localhost:9292</a> のアドレスでアクセスできるようになります．</p>
+
+<p> <code>-h</code> でホスト，<code>-p</code> でポートを指定できます．</p>
+
+<pre><code>$ cg server -h xx.xx.xx.xx -p 8080
+</code></pre></li>
+</ol>
+
+
+<h3>応用(Tips)</h3>
+
+<h4>Tips 1. ディレクトリ構成を分けたい場合</h4>
+
+<p>プロジェクトディレクトリ直下ではなくその下にディレクトリを分けて Web ページを管理したい場合は，
+Markdown ファイルの名前をルールに従って記述してください．</p>
+
+<p>例</p>
+
+<ul>
+<li><p><em>foo/index.html</em> を作りたい場合は <em>foo+index.mkd</em> のようににディレクトリ名とページの名前を <em>+(プラス)</em> でつなぎます．</p>
+
+<pre><code>$ cg convert cg.example.com/markdown/foo+index.mkd
+</code></pre>
+
+<blockquote><pre><code>=&gt; cg.example.com/foo/index.html
+</code></pre></blockquote>
+
+<p>  ブラウザからは <em>http://localhost:9292/foo/index.html</em> にアクセスできます．</p></li>
+<li><p><em>foo/bar/hello.html</em> のように階層を深くしたい場合には <em>foo-bar+hello.mkd</em> のようにディレクトリ名を<em>-(ハイフン)</em> でつなぎます．</p>
+
+<pre><code>$ cg convert cg.example.com/markdown/foo-bar+hello.mkd
+</code></pre>
+
+<blockquote><pre><code>=&gt; cg.example.com/foo/bar/hello.html
+</code></pre></blockquote>
+
+<p>  ブラウザからは <em>http://localhost:9292/foo/bar/hello.html</em> にアクセスできます．</p></li>
+</ul>
+
+
+<h4>Tips 2. Web サイトのテンプレートをカスタマイズしたい場合</h4>
+
+<p>テンプレートはプロジェクトディレクトリ直下の <code>templates</code> ディレクトリに格納されています．</p>
+
+<p>全ページに適用される <code>html.erb</code> というファイルを編集しサイトを再構築する反映されます．</p>
+
+<ol>
+<li><p>テンプレートを編集</p>
+
+<pre><code>$ vi templates/html.rb
+</code></pre></li>
+<li><p>サイトを再構築</p>
+
+<pre><code>$ cg rebuild
+</code></pre></li>
+</ol>
+
+
+<p><code>cg rebuild</code> コマンドを実行しないとカスタイマイズしたテンプレートの内容は反映されません．</p>
+
+<p><em>テンプレートで使用できる埋め込み変数</em></p>
+
+<table>
+<thead>
+<tr>
+<th>変数名    </th>
+<th> 内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@domain   </td>
+<td> Web サイトのドメイン</td>
+</tr>
+<tr>
+<td>@relative </td>
+<td> 現在の Web ページからトップディレクトリまでの相対パス</td>
+</tr>
+<tr>
+<td>@title    </td>
+<td> Web ページのタイトル</td>
+</tr>
+<tr>
+<td>@article  </td>
+<td> Markdown ファイルから変換された HTML コード</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Tips 3. cg convert をエディタにフックして使用する</h4>
+
+<p>Markdown ファイルを編集して毎回 <code>cg convert</code> コマンドを実行するのは面倒です．</p>
+
+<p>そこで Vim の設定ファイルに下記の設定を追加すると，Markdown ファイルを保存する度に自動的に
+HTML へ変換されるようになります．</p>
+
+<pre><code>$ vi .vimrc
+</code></pre>
+
+<blockquote><pre><code>autocmd BufWritePost *.mkd :silent !cg convert % &gt; /dev/null
+</code></pre></blockquote>
+
+<h4>Tips 4. コメントシステム DISQUS を cg に導入する</h4>
+
+<p>cg で生成できるのは静的な Web ページだけです．</p>
+
+<p>そのため一般的な blog にあるようなコメント欄を作りたい場合は，DISQUS 用のコードを
+Markdown ファイルに埋め込みます．</p>
+
+<p>まず DISQUS にサイトを登録しておく必要があります．</p>
+
+<p>cg ではプロジェクト名から自動的に DISQUS と関連付けを行うため <code>cg.example.com</code> というプロジェクトの場合，
+DISQUS のサイト登録の際，<em>Site Shortname</em>という項目に <code>cg-example-com</code> と入力してください．</p>
+
+<p>Markdown ファイルに埋め込む disqus コードは次のように記述します．</p>
+
+<pre><code>&lt;div&gt;&lt;%= @disqus %&gt;&lt;/div&gt;
+</code></pre>
+
+<p>埋め込んだ後 <code>cg convert</code> か <code>cg rebuild</code> を実行すれば DISQUS コメントシステムが導入された
+Web ページが生成されます．</p>
+
+<h3>関連リンク</h3>
+
+<ul>
+<li><a href="http://rubygems.org/gems/cg">cg - RubyGems</a></li>
+<li><a href="http://github.com/Tomohiro/cg">cg - ソースコード</a></li>
+<li><a href="http://blog.2310.net/archives/6" title="blog::2310 » Markdown文法の全訳">blog::2310 » Markdown文法の全訳</a></li>
+</ul>
+
+
+<h3>謝辞</h3>
+
+<p>cg は以下のライブラリを利用して作成されています．</p>
+
+<ul>
+<li>rack</li>
+<li>rake</li>
+<li>jeweler</li>
+<li>tilt</li>
+<li>erubis</li>
+<li>rdiscount</li>
+</ul>
+
+
+<div><script>
+(function() {
+    var links = document.getElementsByTagName('a');
+    var query = '?';
+    for(var i = 0; i < links.length; i++) {
+        if(links[i].href.indexOf('#disqus_thread') >= 0) {
+            query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+        }
+    }
+    document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/cg/get_num_replies.js' + query + '"></' + 'script>');
+})();
+</script>
+<section id="disqus_thread"></section>
+<script type="text/javascript">
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://cg.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cg">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+
+
+<!-- Auto generated end -->
+
+            </article>
+        </section>
+
+        <footer>
+            <p>Copyright &#169; 2010 <a href="mailto:tomohiro.t@gmail.com">Tomohiro</a> All rights reserved.</p>
+            <p>Powered by <a href="http://rubygems.org/gems/cg" title="cg - A Ruby based contents generator">cg - A Ruby based contents generator</a></p>
+        </footer>
+    </body>
+</html>

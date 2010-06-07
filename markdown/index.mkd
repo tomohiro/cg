@@ -1,0 +1,304 @@
+cg - A Ruby based contents generator
+================================================================================
+
+
+cg の使い方
+--------------------------------------------------------------------------------
+
+
+### はじめに
+
+cg は CLI 上で動作させることに特化した HTML コンテンツジェネレータです．
+
+Markdown 記法で記述されたテキストファイルを HTML コードに変換し，用意されたテンプレートに埋め込んで静的
+HTML ファイルを含んだ Web サイトを構築します．
+
+Vim/Emacs 等，CLI 上でよく使用されるエディタを普段から愛用している人は便利に使用できるでしょう．
+
+
+### インストール
+
+cg は RubyGems のライブラリとして公開されており，`gem` コマンドでインストールすることができます．
+
+
+    $ sudo gem install cg
+
+依存しているライブラリも共にインストールされます．
+
+>     Building native extensions.  This could take a while...
+>     Successfully installed tilt-0.10
+>     Successfully installed abstract-1.0.0
+>     Successfully installed erubis-2.6.5
+>     Successfully installed rdiscount-1.6.3.2
+>     Successfully installed cg-0.0.6
+>     5 gems installed
+
+インストールされた cg のバージョンは下記のように確認できます．
+
+    $ cg version
+>     cg 0.0.7
+
+
+### プロジェクトの作成
+
+まず最初に `cg scratch project-name` コマンドで Web サイトのプロジェクトを作成します．
+
+プロジェクト名にはドメイン名を使用するのが良いでしょう．
+
+    $ cg scratch test.example.com
+
+プロジェクトはディレクトリとして生成されます．
+
+ディレクトリの中の構成を確認しましょう．
+
+    $ cd test.example.com
+    $ ls
+>     images markdown scripts styles templates
+
+`images` `markdown` `scripts` `styles` `templates` というディレクトリが存在すれば
+プロジェクトの作成は成功です．
+
+ではさっそく Web サイトを生成してみましょう．
+
+生成にはプロジェクトディレクトリ直下で `cg rebuild` コマンドを実行します．
+
+    $ cg rebuild
+
+>     Rebuild Start.  Fri Jun 04 13:39:39 +0900 2010
+>     markdown/index.mkd => /home/tomohiro/test.example.com/index.html
+>     Rebuild Success.  Fri Jun 04 13:39:39 +0900 2010
+
+`Rebuild Success.` が表示されれば，Web サイトの構築は終了です．
+
+構築した Web サイトを確認するため, `cg server` コマンドで Web サーバを起動します．
+
+    $ cg server
+
+>     [2010-06-04 13:06] cg server start. http://localhost:9292
+>     [2010-06-04 13:44:24] INFO  WEBrick 1.3.1
+>     [2010-06-04 13:44:24] INFO  ruby 1.8.7 (2010-01-10) [i486-linux]
+>     [2010-06-04 13:44:24] INFO  WEBrick::HTTPServer#start: pid=25638 port=9292
+
+起動すると [http://localhost:9292](http://localhost:9292) へアクセスできるようになります．
+
+Web ブラウザで下記のような画面が表示されていれば成功です．
+
+![cg のインデックス画面](/images/index.png)
+
+
+### Web ページを新規作成する
+
+次に新たな Web ページを作成してみます．
+
+まず Web ページを生成するための元となる Markdown ファイルを作っておきましょう．
+
+好みのエディタで `markdown` ディレクトリ以下に `hello.mkd` というファイルを新規作成します．
+
+    $ vi markdown/hello.mkd
+
+>     # こんにちは
+
+`hello.mkd` に「# こんにちは」という文章を入力して保存・終了してください．
+
+これで Web ページを作るための元ファイルが出来ました．
+
+元ファイルを HTML ファイルに変換する時は `cg convert` コマンドを使用します．
+
+    $ cg convert hello.mkd
+>     markdown/hello.mkd => /home/tomohiro/test.example.com/hello.html
+
+`hello.mkd` を元に生成された `hello.html` には [http://localhost:9292/hello.html](http://localhost:9292/hello.html)
+というアドレスでアクセスできます．
+
+生成に成功していれば下記のように表示されるでしょう．
+
+![新規作成した hello.html の画面](/images/hello.png)
+
+このように `markdown` ディレクトリ以下に Markdown 形式のファイルを作成することで新たな Web ページを
+増やしていくことができます．
+
+
+### 基本コマンド
+
+1. プロジェクト作成 - `cg scratch`
+
+       $ cg scratch cg.example.com
+
+2. Web ページの生成 - `cg convert`
+
+       $ cd cg.example.com
+       $ cg convert index.mkd
+
+    >     index.mkd => /home/tomohiro/cg.example.com/index.html
+
+3. サイト全体の再構成 - `cg rebuild`
+
+    `cg rebuild` コマンドは `markdown` ディレクトリ以下にある Markdown ファイル全てに `cg convert` を実行します．
+
+       $ cd cg.example.com
+       $ cg rebuild
+
+    >     Rebuild Start.  Fri Jun 04 15:23:49 +0900 2010
+    >     markdown/index.mkd => /tmp/test.example.com/index.html
+    >     markdown/hello.mkd => /tmp/test.example.com/hello.html
+    >     Rebuild Success.  Fri Jun 04 15:23:49 +0900 2010
+
+4. 再構築して必要なファイルだけを圧縮ファイルにする - `cg rebuild packing`
+
+    プロジェクトディレクトリを公開ディレクトリに置きたくない人もいることでしょう．
+
+    `cg rebuild` コマンドに `packing` オプションを付加すると生成された Web ページ全体を圧縮ファイルとしてまとめることができます。
+
+    圧縮ファイルは `public.tar.gz` というファイル名でディレクトリ直下に生成されます．
+
+        $ cd cg.example.com
+        $ cg rebuild packing
+
+    >     Rebuild Start.  Fri Jun 04 14:53:33 +0900 2010
+    >     markdown/index.mkd => /tmp/test.example.com/index.html
+    >     markdown/hello.mkd => /tmp/test.example.com/hello.html
+    >        Packing Start.  Fri Jun 04 14:53:33 +0900 2010
+    >     hello.html
+    >     images/
+    >     images/please_puts_image_here
+    >     index.html
+    >     scripts/
+    >     scripts/disqus.js
+    >     scripts/create-elements.js
+    >     styles/
+    >     styles/fonts-min.css
+    >     styles/default.css
+    >     styles/cg.css
+    >     styles/reset-min.css
+    >     styles/iphone.css
+    >       Fri Jun 04 14:53:33 +0900 2010
+    >        Packing End.  Fri Jun 04 14:53:33 +0900 2010
+    >     Rebuild Success.  Fri Jun 04 14:53:33 +0900 2010
+
+
+    圧縮ファイルを下記のように展開すれば公開ディレクトリへデプロイできます．
+
+       $ tar zxvf public.tar.gz -C /var/www/html/
+
+    圧縮ファイルに含めたくないファイルを追加する場合は `.exclude` ファイルを編集します．
+
+       $ vi .exclude
+    >     templates
+    >     markdown
+    >     public.tar.gz
+    >     .git
+
+5. cg サーバ起動 - `cg server`
+
+       $ cg server
+
+    cg サーバを起動すると [http://localhost:9292](http://localhost:9292) のアドレスでアクセスできるようになります．
+
+    `-h` でホスト，`-p` でポートを指定できます．
+
+       $ cg server -h xx.xx.xx.xx -p 8080
+
+
+### 応用(Tips)
+
+#### Tips 1. ディレクトリ構成を分けたい場合
+
+プロジェクトディレクトリ直下ではなくその下にディレクトリを分けて Web ページを管理したい場合は，
+Markdown ファイルの名前をルールに従って記述してください．
+
+例
+
+- _foo/index.html_ を作りたい場合は _foo+index.mkd_ のようににディレクトリ名とページの名前を _+(プラス)_ でつなぎます．
+
+      $ cg convert cg.example.com/markdown/foo+index.mkd
+    >     => cg.example.com/foo/index.html
+
+
+    ブラウザからは _http://localhost:9292/foo/index.html_ にアクセスできます．
+
+
+- _foo/bar/hello.html_ のように階層を深くしたい場合には _foo-bar+hello.mkd_ のようにディレクトリ名を_-(ハイフン)_ でつなぎます．
+
+      $ cg convert cg.example.com/markdown/foo-bar+hello.mkd
+    >     => cg.example.com/foo/bar/hello.html
+
+    ブラウザからは _http://localhost:9292/foo/bar/hello.html_ にアクセスできます．
+
+
+#### Tips 2. Web サイトのテンプレートをカスタマイズしたい場合
+
+テンプレートはプロジェクトディレクトリ直下の `templates` ディレクトリに格納されています．
+
+全ページに適用される `html.erb` というファイルを編集しサイトを再構築する反映されます．
+
+1. テンプレートを編集
+
+       $ vi templates/html.rb
+
+2. サイトを再構築
+
+       $ cg rebuild
+
+`cg rebuild` コマンドを実行しないとカスタイマイズしたテンプレートの内容は反映されません．
+
+*テンプレートで使用できる埋め込み変数*
+
+変数名    | 内容
+--------- | ---------
+@domain   | Web サイトのドメイン
+@relative | 現在の Web ページからトップディレクトリまでの相対パス
+@title    | Web ページのタイトル
+@article  | Markdown ファイルから変換された HTML コード
+
+
+#### Tips 3. cg convert をエディタにフックして使用する
+
+Markdown ファイルを編集して毎回 `cg convert` コマンドを実行するのは面倒です．
+
+そこで Vim の設定ファイルに下記の設定を追加すると，Markdown ファイルを保存する度に自動的に
+HTML へ変換されるようになります．
+
+    $ vi .vimrc
+>     autocmd BufWritePost *.mkd :silent !cg convert % > /dev/null
+
+
+#### Tips 4. コメントシステム DISQUS を cg に導入する
+
+cg で生成できるのは静的な Web ページだけです．
+
+そのため一般的な blog にあるようなコメント欄を作りたい場合は，DISQUS 用のコードを
+Markdown ファイルに埋め込みます．
+
+まず DISQUS にサイトを登録しておく必要があります．
+
+cg ではプロジェクト名から自動的に DISQUS と関連付けを行うため `cg.example.com` というプロジェクトの場合，
+DISQUS のサイト登録の際，*Site Shortname*という項目に `cg-example-com` と入力してください．
+
+Markdown ファイルに埋め込む disqus コードは次のように記述します．
+
+    <div><%= @disqus %></div>
+
+埋め込んだ後 `cg convert` か `cg rebuild` を実行すれば DISQUS コメントシステムが導入された
+Web ページが生成されます．
+
+
+### 関連リンク
+
+- [cg - RubyGems](http://rubygems.org/gems/cg)
+- [cg - ソースコード](http://github.com/Tomohiro/cg)
+- [blog::2310 » Markdown文法の全訳](http://blog.2310.net/archives/6 "blog::2310 » Markdown文法の全訳")
+
+
+### 謝辞
+
+cg は以下のライブラリを利用して作成されています．
+
+- rack
+- rake
+- jeweler
+- tilt
+- erubis
+- rdiscount
+
+
+<div><%= @disqus %></div>
