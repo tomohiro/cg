@@ -83,7 +83,7 @@ cg は RubyGems のライブラリとして公開されており，`gem` コマ�
 
 Web ブラウザで下記のような画面が表示されていれば成功です．
 
-![cg のインデックス画面](/images/index.png)
+![cg のインデックス画面](./images/index.png)
 
 
 ### Web ページを新規作成する
@@ -112,7 +112,7 @@ Web ブラウザで下記のような画面が表示されていれば成功で�
 
 生成に成功していれば下記のように表示されるでしょう．
 
-![新規作成した hello.html の画面](/images/hello.png)
+![新規作成した hello.html の画面](./images/hello.png)
 
 このように `markdown` ディレクトリ以下に Markdown 形式のファイルを作成することで新たな Web ページを
 増やしていくことができます．
