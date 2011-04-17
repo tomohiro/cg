@@ -29,8 +29,6 @@ if __FILE__ == $0
   end
 
   puts "[#{Time.now.strftime('%Y-%m-%d %H:%m')}] cg server start. http://#{host}:#{port}"
-  options = {:app => CG::Server.new, :Port => port, :Host => host}
-  #server = Rack::Server.new(options)
   server = Rack::Server.new(:Port => port, :host => host)
   server.instance_variable_set('@app', CG::Server.new)
   server.start
