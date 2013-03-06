@@ -3,7 +3,7 @@
 CG_ROOT = File.expand_path('..', File.dirname(__FILE__))
 $: << CG_ROOT
 
-Version = open(CG_ROOT + '/VERSION').read
+#Version = open(CG_ROOT + '/VERSION').read
 
 if ARGV.include? '--version'
   puts "#{File.basename(__FILE__)} #{Version}"
