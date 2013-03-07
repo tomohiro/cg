@@ -26,7 +26,7 @@ class ContentsGenerator
   def get_commands
     commands = []
     Dir.entries(CG_LIB).each do |file|
-      commands << file.gsub!('.rb', '') if file =~ /rb/
+      commands << file.gsub!('.rb', '') if file =~ /rb/ and file != 'version.rb'
     end
     commands
   end
