@@ -18,7 +18,7 @@ module CG
       @source = source || ARGV.first
 
       @root = File.expand_path(File.dirname(@source)).gsub('markdown', '')
-      @domain = @root.split('/').last
+      @domain = domain
 
       @templates_dir = templates_dir
     end
@@ -87,6 +87,17 @@ module CG
       @title = [(Nokogiri::HTML(@article)/'h1').text, @domain].join(' - ')
 
       page.render(self)
+    end
+
+    private
+
+    def domain
+      domain_filepath = "#{@root}/CNAME"
+      if File.exist?(domain_filepath)
+        open(domain_filepath).read.chomp
+      else
+        @root.split('/').last
+      end
     end
   end
 end
